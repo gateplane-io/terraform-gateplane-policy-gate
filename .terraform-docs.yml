@@ -1,0 +1,51 @@
+formatter: markdown
+
+sort:
+  enabled: true
+  by: required
+
+
+output:
+  file: "README.md"
+  mode: replace
+  # For the Pre-Commit to be happy with its newline
+  template: "{{ .Content }}\n"
+
+
+content: |-
+  # Vault/OpenBao setup for [GatePlane Policy-Gate Plugin](https://github.com/gateplane-io/vault-plugins/tree/main/cmd/policy-gate)
+  ![License: ElasticV2](https://img.shields.io/badge/ElasticV2-green?style=flat-square&label=license&cacheSeconds=3600&link=https%3A%2F%2Fwww.elastic.co%2Flicensing%2Felastic-license)
+
+  This Terraform module mounts the Policy-Gate Plugin under a Vault/OpenBao path.
+
+  It additionally creates two policies that can access the mount, in order to both create and approve AccessRequests.
+
+  Finally, it optionally enables these policies to be used by the UI (under [`app.gateplane.io`](https://app.gateplane.io) or different domain).
+
+
+  {{ .Requirements }}
+
+  {{ .Providers }}
+
+  {{ .Resources }}
+
+  {{ .Inputs }}
+
+  {{ .Outputs }}
+
+
+  ## License
+
+  This project is licensed under the [Elastic License v2](https://www.elastic.co/licensing/elastic-license).
+
+  This means:
+
+  - ✅ You can use, fork, and modify it for **yourself** or **within your company**.
+  - ✅ You can submit pull requests and redistribute modified versions (with the license attached).
+  - ❌ You may **not** sell it, offer it as a paid product, or use it in a hosted service (e.g., SaaS).
+  - ❌ You may **not** re-license it under a different license.
+
+  In short: You can use and extend the code freely, privately or inside your business - just don’t build a business around it without our permission.
+  [This FAQ by Elastic](https://www.elastic.co/licensing/elastic-license/faq) greatly summarizes things.
+
+  See the [`./LICENSES/Elastic-2.0.txt`](./LICENSES/Elastic-2.0.txt) file for full details.
