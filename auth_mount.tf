@@ -14,8 +14,8 @@ resource "vault_auth_backend" "this" {
   description = var.description
 
   tune {
-    default_lease_ttl = var.token_lease_ttl
-    max_lease_ttl     = var.token_lease_ttl
+    default_lease_ttl = var.lease_ttl
+    max_lease_ttl     = var.lease_ttl
 
     audit_non_hmac_request_keys  = ["reason", "policies", "request_id", ]
     audit_non_hmac_response_keys = ["reason", "policies", "request_id", ]

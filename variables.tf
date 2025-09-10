@@ -49,7 +49,7 @@ variable "protected_policies" {
   }
 }
 
-variable "token_lease_ttl" {
+variable "lease_ttl" {
   description = "The duration that the protected token will be active (e.g.: `1h`)."
   default     = "30m"
 }
