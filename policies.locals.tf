@@ -28,6 +28,10 @@ path "sys/policy/*" {
   capabilities = ["read"]
 }
 
+path "sys/policies/acl/*" {
+  capabilities = ["read"]
+}
+
 path "sys/capabilities-self" {
   capabilities = ["update"]
 }
@@ -41,20 +45,16 @@ path "identity/entity/id/*" {
 }
 
 // Used to automatically sign you in with Vault OIDC
-// for Notification server interaction
+// for interaction with GatePlane Services
 path "auth/token/create" {
   capabilities = ["update"]
-}
-
-path "secret/data/gateplane/*" {
-  capabilities = ["read"]
 }
 
 path "sys/wrapping/unwrap" {
   capabilities = ["update"]
 }
 
-// -- Gatekeeper specific
+// -- Allow to read the GatePlane plugin config
 path "${local.plugin_paths["config"]}" {
   capabilities = ["read"]
 }
