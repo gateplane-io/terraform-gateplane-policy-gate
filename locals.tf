@@ -10,16 +10,10 @@
 
 locals {
 
-  plugin_paths_name  = "${var.endpoint_prefix != "" ? "${var.endpoint_prefix}-" : ""}${var.name}"
-  plugin_paths_mount = "${var.path_prefix != "" ? "${var.path_prefix}/" : ""}${local.plugin_paths_name}"
-  plugin_paths_base  = "auth/${local.plugin_paths_mount}"
-
-  plugin_paths = {
-    request = "${local.plugin_paths_base}/request",
-    approve = "${local.plugin_paths_base}/approve",
-    claim   = "${local.plugin_paths_base}/claim",
-    config  = "${local.plugin_paths_base}/config",
-  }
+  plugin_paths = merge(module.base.paths, {
+    "access" : "${module.base.mount_path}/config/access",
+    "vault" : "${module.base.mount_path}/config/api/vault",
+  })
 
   protected_policies = var.protected_policies == null ? [vault_policy.target[0].name] : var.protected_policies
 

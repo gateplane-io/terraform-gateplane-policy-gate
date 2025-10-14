@@ -8,28 +8,6 @@
 # Use, modification, and redistribution permitted under the terms of the license,
 # except for providing this software as a commercial service or product.
 
-variable "name" {
-  description = "Name of the gate, used in the mount path and generated policies"
-}
-
-variable "description" {
-  description = "Brief explanation of what access is claimed by this gate"
-  default     = ""
-}
-
-variable "policy_prefix" {
-  default = "gateplane"
-}
-
-variable "endpoint_prefix" {
-  default = "gp"
-}
-
-variable "path_prefix" {
-  description = "Where under `auth/` will the endpoint be mounted"
-  default     = "gateplane"
-}
-
 variable "protected_path_map" {
   description = "A map of Vault/OpenBao paths to lists of capabilities, to be protected by this gate (e.g.: `{\"secret/data/mysecret\":[\"read\"]}`).\nMutually exclusive with `protected_policies`."
   default     = null
@@ -49,21 +27,54 @@ variable "protected_policies" {
   }
 }
 
+
+variable "plugin_name" {
+  description = "The name of the plugin to mount (e.g: `gateplane-policy-gate`)."
+  default     = "gateplane-policy-gate"
+}
+
+
+variable "approle_mount" {
+  description = "The Vault/OpenBao AppRole Auth Method mount that the plugin will authenticate against."
+  default     = "gateplane/approle"
+}
+
+
+// Required by Base Plugin
+
+variable "name" {
+  description = "Name of the gate, used in the mount path and generated policies."
+}
+
+variable "description" {
+  description = "Brief explanation of what access is requested through this gate."
+  default     = ""
+}
+
+variable "policy_prefix" {
+  default = "gateplane"
+}
+
+variable "endpoint_prefix" {
+  default = "gp"
+}
+
+variable "path_prefix" {
+  description = "The endpoint where the plugin will be mounted."
+  default     = "gateplane"
+}
+
 variable "lease_ttl" {
-  description = "The duration that the protected token will be active (e.g.: `1h`)."
+  description = "The duration that the protected token will be active (e.g.: \"`1h`\")."
   default     = "30m"
 }
 
+variable "lease_max_ttl" {
+  description = "The duration that the protected token will be active (e.g.: \"`1h`\")."
+  default     = "1h"
+}
+
 variable "plugin_options" {
-  description = "Options provided by the plugin, available [in plugin documentation](https://github.com/gateplane-io/vault-plugins)."
+  description = "Base options provided by the plugin to the `/config` endpoint, available [in plugin documentation](https://github.com/gateplane-io/vault-plugins)."
   default     = {}
-}
-
-variable "plugin_name" {
-  default = "gateplane-policy-gate"
-}
-
-variable "enable_ui" {
-  description = "Add capabilities for GatePlane UI to the created policies."
-  default     = true
 }

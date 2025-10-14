@@ -8,35 +8,8 @@
 # Use, modification, and redistribution permitted under the terms of the license,
 # except for providing this software as a commercial service or product.
 
-# Policy for the "user"
-resource "vault_policy" "user" {
-  name   = "${local.policy_prefix}-requestor"
-  policy = <<EOF
-${var.enable_ui ? local.ui_policies : ""}
-
-path "${local.plugin_paths["request"]}" {
-  capabilities = ["read", "update"]
-}
-EOF
-}
-
-# Policy for the "gatekeeper"
-resource "vault_policy" "gtkpr" {
-  name   = "${local.policy_prefix}-approver"
-  policy = <<EOF
-${var.enable_ui ? local.ui_policies : ""}
-
-path "${local.plugin_paths["request"]}" {
-  capabilities = ["list"]
-}
-
-path "${local.plugin_paths["approve"]}" {
-  capabilities = ["update"]
-}
-EOF
-}
-
-# Policy for accessing all the secret engines!
+// Target Policy for accessing
+// all the provided "protected paths"
 resource "vault_policy" "target" {
   count = var.protected_policies == null ? 1 : 0
 
