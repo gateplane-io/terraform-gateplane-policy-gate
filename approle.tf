@@ -60,7 +60,7 @@ resource "vault_generic_endpoint" "plugin_api_vault_config" {
   depends_on = [module.base]
 
   path                 = local.plugin_paths["vault"]
-  disable_read         = true
+  disable_read         = false
   disable_delete       = true
   ignore_absent_fields = true
 
@@ -70,8 +70,4 @@ resource "vault_generic_endpoint" "plugin_api_vault_config" {
     "role_secret"   = vault_approle_auth_backend_role_secret_id.this.secret_id
     "approle_mount" = vault_auth_backend.approle.path
   })
-
-  lifecycle {
-    replace_triggered_by = [null_resource.reconfigure]
-  }
 }
