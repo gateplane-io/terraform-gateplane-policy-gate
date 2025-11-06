@@ -19,14 +19,4 @@ resource "vault_generic_endpoint" "plugin_config_access" {
   data_json = jsonencode({
     "policies" = join(",", local.protected_policies)
   })
-
-  lifecycle {
-    replace_triggered_by = [null_resource.reconfigure]
-  }
-}
-
-resource "null_resource" "reconfigure" {
-  triggers = {
-    always_recreate = timestamp()
-  }
 }
