@@ -17,6 +17,6 @@ resource "vault_generic_endpoint" "plugin_config_access" {
   ignore_absent_fields = true
 
   data_json = jsonencode({
-    "policies" = join(",", local.protected_policies)
+    "policies" = local.protected_policies
   })
 }
