@@ -27,21 +27,33 @@ variable "protected_policies" {
   }
 }
 
-
 variable "plugin_name" {
   description = "The name of the plugin to mount (e.g: `gateplane-policy-gate`)."
   default     = "gateplane-policy-gate"
 }
 
+variable "policy_prefix" {
+  description = "The prefix used for the Policy created by `protected_path_map` variable."
+  default     = "gateplane"
+}
 
+// Required by AppRole Configuration
 variable "approle_mount" {
   description = "The Vault/OpenBao AppRole Auth Method mount that the plugin will authenticate against."
   default     = "gateplane/approle"
 }
 
+variable "approle_policy_name" {
+  description = "The name of the Vault/OpenBao Policy to be assigned to the plugin (created by [`gateplane-setup`](https://github.com/gateplane-io/terraform-gateplane-setup) plugin)"
+  default     = "gateplane-policy-gate-policy"
+}
+
+variable "vault_addr_local" {
+  description = "The URL used by the Vault/OpenBao plugin (running alongside Vault/OpenBao) to access the API. Can be the one used by the Vault Provider or a local URL."
+  default     = "http://127.0.0.1:8200"
+}
 
 // Required by Base Plugin
-
 variable "name" {
   description = "Name of the gate, used in the mount path and generated policies."
 }
@@ -51,10 +63,7 @@ variable "description" {
   default     = ""
 }
 
-variable "policy_prefix" {
-  default = "gateplane"
-}
-
+# TODO: allow a way to set absolute path, no parameterization
 variable "endpoint_prefix" {
   default = "gp"
 }
@@ -65,7 +74,7 @@ variable "path_prefix" {
 }
 
 variable "lease_ttl" {
-  description = "The duration that the protected token will be active (e.g.: \"`1h`\")."
+  description = "The duration that the protected token will be active (e.g.: \"`30m`\")."
   default     = "30m"
 }
 

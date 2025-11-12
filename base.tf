@@ -16,7 +16,6 @@ module "base" {
   name        = var.name
   description = var.description
 
-  policy_prefix   = var.policy_prefix
   endpoint_prefix = var.endpoint_prefix
   path_prefix     = var.path_prefix
 
