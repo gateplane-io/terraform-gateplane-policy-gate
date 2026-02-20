@@ -9,7 +9,7 @@
 # except for providing this software as a commercial service or product.
 
 module "base" {
-  source = "github.com/gateplane-io/terraform-gateplane-base-gate.git?ref=0.1.4"
+  source = "github.com/gateplane-io/terraform-gateplane-base-gate.git?ref=0.2.0"
 
   plugin_name = var.plugin_name
 
