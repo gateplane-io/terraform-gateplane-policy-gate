@@ -37,14 +37,8 @@ variable "policy_prefix" {
   default     = "gateplane"
 }
 
-// Required by AppRole Configuration
-variable "approle_mount" {
-  description = "The Vault/OpenBao AppRole Auth Method mount that the plugin will authenticate against."
-  default     = "gateplane/approle"
-}
-
-variable "approle_policy_name" {
-  description = "The name of the Vault/OpenBao Policy to be assigned to the plugin (created by [`gateplane-setup`](https://github.com/gateplane-io/terraform-gateplane-setup) plugin)"
+variable "gateplane_policy_gate_policy_name" {
+  description = "The name of the Vault/OpenBao policy assigned to the Policy Gate periodic orphan token (created by the [`gateplane-setup`](https://github.com/gateplane-io/terraform-gateplane-setup) module)."
   default     = "gateplane-policy-gate-policy"
 }
 

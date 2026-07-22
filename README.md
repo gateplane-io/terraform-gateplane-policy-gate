@@ -12,37 +12,34 @@ Finally, it optionally enables these policies to be used by the UI (under [`app.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11.0 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | >= 3.2.4 |
-| <a name="requirement_vault"></a> [vault](#requirement\_vault) | >= 4.7.0 |
+| <a name="requirement_vault"></a> [vault](#requirement\_vault) | >= 5.0.0 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_vault"></a> [vault](#provider\_vault) | 4.7.0 |
+| ---- | ------- |
+| <a name="provider_vault"></a> [vault](#provider\_vault) | >= 5.0.0 |
 
 ## Resources
 
 | Name | Type |
-|------|------|
-| [vault_approle_auth_backend_role.this](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/approle_auth_backend_role) | resource |
-| [vault_approle_auth_backend_role_secret_id.this](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/approle_auth_backend_role_secret_id) | resource |
+| ---- | ---- |
 | [vault_generic_endpoint.plugin_api_vault_config](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/generic_endpoint) | resource |
 | [vault_generic_endpoint.plugin_config_access](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/generic_endpoint) | resource |
 | [vault_policy.target](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/policy) | resource |
-| [vault_approle_auth_backend_role_id.this](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/data-sources/approle_auth_backend_role_id) | data source |
+| [vault_token.this](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/token) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_name"></a> [name](#input\_name) | Name of the gate, used in the mount path and generated policies. | `any` | n/a | yes |
-| <a name="input_approle_mount"></a> [approle\_mount](#input\_approle\_mount) | The Vault/OpenBao AppRole Auth Method mount that the plugin will authenticate against. | `string` | `"gateplane/approle"` | no |
-| <a name="input_approle_policy_name"></a> [approle\_policy\_name](#input\_approle\_policy\_name) | The name of the Vault/OpenBao Policy to be assigned to the plugin (created by [`gateplane-setup`](https://github.com/gateplane-io/terraform-gateplane-setup) plugin) | `string` | `"gateplane-policy-gate-policy"` | no |
 | <a name="input_description"></a> [description](#input\_description) | Brief explanation of what access is requested through this gate. | `string` | `""` | no |
 | <a name="input_endpoint_prefix"></a> [endpoint\_prefix](#input\_endpoint\_prefix) | TODO: allow a way to set absolute path, no parameterization | `string` | `"gp"` | no |
+| <a name="input_gateplane_policy_gate_policy_name"></a> [gateplane\_policy\_gate\_policy\_name](#input\_gateplane\_policy\_gate\_policy\_name) | The name of the Vault/OpenBao policy assigned to the Policy Gate periodic orphan token (created by the [`gateplane-setup`](https://github.com/gateplane-io/terraform-gateplane-setup) module). | `string` | `"gateplane-policy-gate-policy"` | no |
 | <a name="input_lease_max_ttl"></a> [lease\_max\_ttl](#input\_lease\_max\_ttl) | The duration that the protected token will be active (e.g.: "`1h`"). | `string` | `"1h"` | no |
 | <a name="input_lease_ttl"></a> [lease\_ttl](#input\_lease\_ttl) | The duration that the protected token will be active (e.g.: "`30m`"). | `string` | `"30m"` | no |
 | <a name="input_path_prefix"></a> [path\_prefix](#input\_path\_prefix) | The endpoint where the plugin will be mounted. | `string` | `"gateplane"` | no |
@@ -56,7 +53,7 @@ Finally, it optionally enables these policies to be used by the UI (under [`app.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_mount_path"></a> [mount\_path](#output\_mount\_path) | The Vault/OpenBao path where the plugin has been mounted. |
 | <a name="output_paths"></a> [paths](#output\_paths) | The map of paths supported by this plugin. |
 | <a name="output_policies"></a> [policies](#output\_policies) | The verbatim policies created and referenced in this module. |
